@@ -5,3 +5,5 @@ import whoWonProp from "@/src/types/interfaces/whoWonProp";
 export const whoWon = (props: whoWonProp) => {
     console.log(props.board)
 };
+
+// export const tilePressed = (board, tile) =>

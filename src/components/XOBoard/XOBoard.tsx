@@ -9,6 +9,8 @@ import tileState from "@/src/types/enums/tileState";
 const XOBoardComponent = () => {
     const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
     // const [isReset, setIsReset] = useState<boolean>(false);
+
+
     useEffect(() => {
         // whoWon()
     });
