@@ -3,11 +3,11 @@ import {useContext, useState} from "react";
 import tileState from "@/src/types/enums/tileState"
 import {ImagesAssets} from "@/assets/ImageAssets";
 import xoTurn from "@/src/types/enums/xoTurn";
-import {CurrentTurnContext} from "@/src/Contests/CurrentTurnContext";
+import {CurrentTurnContext} from "@/src/Contexts/CurrentTurnContext";
 
 
 const TileComponent = () => {
-    const [currentTurn, setCurrentTurn] = useContext<xoTurn>(CurrentTurnContext) ;
+    const [currentTurn, setCurrentTurn] = useContext(CurrentTurnContext) ;
     const [state, setState] = useState<tileState>(tileState.BLANK);
 
     const pressed = () => {
@@ -17,7 +17,6 @@ const TileComponent = () => {
         }
         setState((state === tileState.BLANK) ? (currentTurn === xoTurn.O ? tileState.O : tileState.X) : state);
         setCurrentTurn(currentTurn === xoTurn.X ? xoTurn.O : xoTurn.X)
-        // props.setCurrentTurn((props.currentTurn === xoTurn.X ? xoTurn.O : xoTurn.X));
     }
 
     return (

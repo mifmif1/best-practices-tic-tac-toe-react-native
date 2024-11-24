@@ -1,25 +1,26 @@
 import {StyleSheet, View} from "react-native";
-import {createContext, useState} from "react";
+import {useState} from "react";
 import TileComponent from "@/src/components/XOBoard/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
-import {CurrentTurnContext} from "@/src/Contests/CurrentTurnContext";
+import {CurrentTurnContext} from "@/src/Contexts/CurrentTurnContext";
 
 
 const XOBoardComponent = () => {
-    const [currentTurn, setCurrentTurn] = useState(xoTurn.X);
+    const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
     // const [isReset, setIsReset] = useState<boolean>(false);
 
     return (<View style={styles.board}>
         <View style={styles.columnContainer}>
-            {[...Array(3).keys()].map((_, columnIndex) => <View style={styles.rowContainer}>
-                {[...Array(3).keys()].map((_, rowIndex) =>
-                    <CurrentTurnContext.Provider value={[currentTurn, setCurrentTurn]}>
-                        <TileComponent
-                            key={`${rowIndex}-${columnIndex}`}
-                        />
-                    </CurrentTurnContext.Provider>
-                )}
-            </View>)}
+            {[...Array(3).keys()].map((_, columnIndex) =>
+                <View key={`Col-${columnIndex}`} style={styles.rowContainer}>
+                    {[...Array(3).keys()].map((_, rowIndex) =>
+                        <CurrentTurnContext.Provider value={[currentTurn, setCurrentTurn]}>
+                            <TileComponent
+                                key={`Tile-${rowIndex}-${columnIndex}`}
+                            />
+                        </CurrentTurnContext.Provider>
+                    )}
+                </View>)}
         </View>)
     </View>);
 };
