@@ -1,18 +1,23 @@
-import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
-import {ImagesAssets} from "@/assets/ImageAssets";
+import {StyleSheet, View} from "react-native";
+import {createContext, useState} from "react";
+import TileComponent from "@/src/components/XOBoard/Tile";
+import xoTurn from "@/src/types/enums/xoTurn";
+import {CurrentTurnContext} from "@/src/Contests/CurrentTurnContext";
+
 
 const XOBoardComponent = () => {
+    const [currentTurn, setCurrentTurn] = useState(xoTurn.X);
+    // const [isReset, setIsReset] = useState<boolean>(false);
 
     return (<View style={styles.board}>
-
         <View style={styles.columnContainer}>
-            {[...Array(3).keys()].map(() => <View style={styles.rowContainer}>
-                {[...Array(3).keys()].map(() => <TouchableOpacity>
-                        <Image
-                            source={ImagesAssets.o}
-                            style={styles.tile}
+            {[...Array(3).keys()].map((_, columnIndex) => <View style={styles.rowContainer}>
+                {[...Array(3).keys()].map((_, rowIndex) =>
+                    <CurrentTurnContext.Provider value={[currentTurn, setCurrentTurn]}>
+                        <TileComponent
+                            key={`${rowIndex}-${columnIndex}`}
                         />
-                    </TouchableOpacity>
+                    </CurrentTurnContext.Provider>
                 )}
             </View>)}
         </View>)
@@ -21,7 +26,7 @@ const XOBoardComponent = () => {
 
 const styles = StyleSheet.create({
     board: {
-        backgroundColor: '#0aa0FF'
+        // backgroundColor: '#0aa0FF'
     },
     rowContainer: {
         flex: 1,
@@ -35,12 +40,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    tile: {
-        resizeMode: 'contain',
-        width: '50',
-        height: '50'
-    },
 })
-
 
 export default XOBoardComponent;

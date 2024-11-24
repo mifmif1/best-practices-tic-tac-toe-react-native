@@ -1,4 +1,5 @@
 export const ImagesAssets = {
-    x: require('./images/xo/x.jpg'),
-    o: require('./images/xo/o.png'),
+    X: require('./images/xo/x.png'),
+    O: require('./images/xo/o.png'),
+    BLANK: require('./images/xo/apple.png'),
 };
