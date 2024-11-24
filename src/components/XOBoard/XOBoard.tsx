@@ -16,14 +16,12 @@ const XOBoardComponent = () => {
                 )}
             </View>)}
         </View>)
-
-
     </View>);
 };
 
 const styles = StyleSheet.create({
     board: {
-        backgroundColor: '#123456'
+        backgroundColor: '#0aa0FF'
     },
     rowContainer: {
         flex: 1,
