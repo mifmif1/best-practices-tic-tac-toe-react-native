@@ -1,13 +1,17 @@
 import {StyleSheet, View} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TileComponent from "@/src/components/XOBoard/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
 import {CurrentTurnContext} from "@/src/Contexts/CurrentTurnContext";
+import tileState from "@/src/types/enums/tileState";
 
 
 const XOBoardComponent = () => {
     const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
     // const [isReset, setIsReset] = useState<boolean>(false);
+    useEffect(() => {
+        // whoWon()
+    });
 
     return (<View style={styles.board}>
         <View style={styles.columnContainer}>
@@ -17,6 +21,9 @@ const XOBoardComponent = () => {
                         <CurrentTurnContext.Provider value={[currentTurn, setCurrentTurn]}>
                             <TileComponent
                                 key={`Tile-${rowIndex}-${columnIndex}`}
+                                row={rowIndex}
+                                column={columnIndex}
+                                state={tileState.BLANK}
                             />
                         </CurrentTurnContext.Provider>
                     )}
@@ -26,9 +33,7 @@ const XOBoardComponent = () => {
 };
 
 const styles = StyleSheet.create({
-    board: {
-        // backgroundColor: '#0aa0FF'
-    },
+    board: {},
     rowContainer: {
         flex: 1,
         flexDirection: 'row',

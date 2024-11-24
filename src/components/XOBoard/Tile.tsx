@@ -4,11 +4,12 @@ import tileState from "@/src/types/enums/tileState"
 import {ImagesAssets} from "@/assets/ImageAssets";
 import xoTurn from "@/src/types/enums/xoTurn";
 import {CurrentTurnContext} from "@/src/Contexts/CurrentTurnContext";
+import TileProps from "@/src/types/interfaces/tile";
 
 
-const TileComponent = () => {
-    const [currentTurn, setCurrentTurn] = useContext(CurrentTurnContext) ;
-    const [state, setState] = useState<tileState>(tileState.BLANK);
+const TileComponent = (props: TileProps) => {
+    const [currentTurn, setCurrentTurn] = useContext(CurrentTurnContext);
+    const [state, setState] = useState<tileState>(props.state);
 
     const pressed = () => {
         if (state != tileState.BLANK) {
