@@ -1,8 +1,7 @@
 import tileState from "@/src/types/enums/tileState";
 
 interface TileProps {
-    row: number,
-    column: number,
+    tileClicked: () => void,
     state: tileState,
 }
 
