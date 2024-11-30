@@ -1,4 +1,4 @@
-import {Button, Pressable, StyleSheet, View, Text} from "react-native";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 import TileComponent from "@/src/components/tile/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
@@ -58,7 +58,9 @@ const XOBoardComponent = () => {
 };
 
 const styles = StyleSheet.create({
-    board: {},
+    board: {
+        flex: 1,
+    },
     rowContainer: {
         flex: 1,
         flexDirection: 'row',
