@@ -1,6 +1,6 @@
-import {StyleSheet, View} from "react-native";
+import {Button, Pressable, StyleSheet, View, Text} from "react-native";
 import {useEffect, useState} from "react";
-import TileComponent from "@/src/components/XOBoard/Tile";
+import TileComponent from "@/src/components/tile/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
 import tileState from "@/src/types/enums/tileState";
 import Board from "@/src/types/interfaces/board";
@@ -18,8 +18,7 @@ const XOBoardComponent = () => {
         const nextBoard: Board = boardStates.map((value, index) => {
             if (index === tileIndex) {
                 return (currentTurn === xoTurn.O ? tileState.O : tileState.X);
-            }
-            else return value;
+            } else return value;
         })
         setBoardStates(nextBoard);
         setCurrentTurn(() => currentTurn === xoTurn.X ? xoTurn.O : xoTurn.X)
@@ -31,12 +30,18 @@ const XOBoardComponent = () => {
     }
 
     useEffect(() => {
-            console.log('wincheck');
             whoWon(boardStates);
         }
     );
 
     return (<View style={styles.board}>
+        <Pressable
+            style={styles.resetButton}
+            onPress={() => resetBoard(xoTurn.X)}
+        >
+            <Text
+                style={styles.resetButtonText}>Reset</Text>
+        </Pressable>
         <View style={styles.columnContainer}>
             {[...Array(3).keys()].map((_, rowIndex) =>
                 <View key={`Row-${rowIndex}`} style={styles.rowContainer}>
@@ -66,6 +71,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    resetButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        // backgroundColor: "#d7482c",
+        backgroundColor: "#83b524",
+    },
+    resetButtonText: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'black',
+    }
 })
 
 export default XOBoardComponent;
