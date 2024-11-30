@@ -22,7 +22,7 @@ const TileComponent = (props: TileProps) => {
 const styles = StyleSheet.create({
     tile: {
         resizeMode: 'contain',
-        width: 80,
+        width: 80, //todo: make it relational to the screen
         height: 50
     },
 })

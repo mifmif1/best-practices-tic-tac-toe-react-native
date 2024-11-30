@@ -1,6 +1,7 @@
 import {Button, Image, Text, TouchableOpacity, View, StyleSheet} from "react-native";
 import {useState} from "react";
 import XOBoardComponent from "@/src/components/XOBoard/XOBoard";
+import XOScreen from "@/src/screens/XOScreen";
 
 
 const stars = (arrLength: number) => {
@@ -13,7 +14,7 @@ export default function Index() {
         <View
             style={styles.index}
         >
-            <XOBoardComponent/>
+            <XOScreen/>
         </View>
 
     );
