@@ -15,13 +15,13 @@ const XOBoardComponent = () => {
             alert("already clicked!");
             return;
         }
-        const newArr = [...boardStates];
-        newArr[tileIndex] = ((boardStates[tileIndex] === tileState.BLANK) ? (currentTurn === xoTurn.O ? tileState.O : tileState.X) : boardStates[tileIndex]);
-
-        setBoardStates(newArr);
-        // setBoardStates((prev)=> ({...prev, prev[row][column]: tileState.X }));
-        // boardStates[row][column]: ((boardStates[row][column] === tileState.BLANK) ? (currentTurn === xoTurn.O ? tileState.O : tileState.X) : boardStates[row][column])}))
-
+        const nextBoard: Board = boardStates.map((value, index) => {
+            if (index === tileIndex) {
+                return (currentTurn === xoTurn.O ? tileState.O : tileState.X);
+            }
+            else return value;
+        })
+        setBoardStates(nextBoard);
         setCurrentTurn(() => currentTurn === xoTurn.X ? xoTurn.O : xoTurn.X)
     }
 
