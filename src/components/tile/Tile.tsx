@@ -1,8 +1,8 @@
-import {Image, StyleSheet, TouchableOpacity} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 import tileState from "@/src/types/enums/tileState"
 import {ImagesAssets} from "@/assets/ImageAssets";
 import TileProps from "@/src/types/interfaces/tile";
-
+import styles from "./style"
 
 const TileComponent = (props: TileProps) => {
     return (
@@ -18,14 +18,5 @@ const TileComponent = (props: TileProps) => {
 
 };
 
-
-const styles = StyleSheet.create({
-    tile: {
-        resizeMode: 'contain',
-        width: 80, //todo: make it relational to the screen
-        height: 80,
-        // flex: 1,
-    },
-})
 
 export default TileComponent;

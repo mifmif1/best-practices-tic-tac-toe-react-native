@@ -1,10 +1,11 @@
-import {Pressable, StyleSheet, Text, View} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 import TileComponent from "@/src/components/tile/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
 import tileState from "@/src/types/enums/tileState";
 import Board from "@/src/types/interfaces/board";
 import {whoWon} from "@/src/services/api/xoAPI"
+    import styles from "./style"
 
 const XOBoardComponent = () => {
     const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
@@ -71,40 +72,5 @@ const XOBoardComponent = () => {
     </View>)
 };
 
-
-const styles = StyleSheet.create({
-    board: {
-        flex: 1,
-    },
-    rowContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    columnContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    resetButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        // backgroundColor: "#d7482c",
-        backgroundColor: "#83b524",
-    },
-    resetButtonText: {
-        fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'black',
-    }
-})
 
 export default XOBoardComponent;
