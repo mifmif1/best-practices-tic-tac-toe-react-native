@@ -31,7 +31,13 @@ const XOBoardComponent = () => {
     }
 
     useEffect(() => {
-            whoWon(boardStates);
+            const winner = whoWon(boardStates);
+            if (winner === tileState.O) {
+                alert('O winner')
+            } else if (winner === tileState.X) {
+                alert('X winner')
+            }
+
         }
     );
 
@@ -41,14 +47,22 @@ const XOBoardComponent = () => {
             style={styles.resetButton}
             onPress={() => resetBoard(xoTurn.X)}
         >
-            <Text style={styles.resetButtonText}>Reset</Text>
+            <Text style={styles.resetButtonText}>
+                Reset
+            </Text>
         </Pressable>
+
+        <Text>
+            Current Turn: {currentTurn === xoTurn.X ? "X" : "O"}
+        </Text>
 
         <View style={styles.columnContainer}>
             {boardStates.map((rowElements, rowIndex) =>
-                <View style={styles.rowContainer}>
+                <View style={styles.rowContainer} key={`row-${rowIndex}`}>
                     {rowElements.map((tileValue, columnIndex) =>
-                        <TileComponent state={tileValue} tileClicked={() => tileClicked(rowIndex, columnIndex)}/>
+                        <TileComponent key={`tile-${rowIndex}-${columnIndex}`}
+                                       state={tileValue}
+                                       tileClicked={() => tileClicked(rowIndex, columnIndex)}/>
                     )}
                 </View>
             )}

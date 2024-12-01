@@ -3,19 +3,62 @@ import tileState from "@/src/types/enums/tileState";
 
 //todo: make it related to the board shape
 export const whoWon = (boardStates: Board) => {
+        const rows = boardStates.length
+        const columns = boardStates[0].length
 
+        //row check:
+        for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+            let sameTileSum = 1;
+            if (boardStates[rowIndex][0] != tileState.BLANK) {
+                for (let columnIndex = 1; columnIndex < columns; columnIndex++) {
+                    if (boardStates[rowIndex][columnIndex] === boardStates[rowIndex][columnIndex - 1]) {
+                        sameTileSum++;
+                    }
+                }
+                if (sameTileSum === columns) return boardStates[rowIndex][0];
+            }
+        }
 
+        //column check
+        for (let columnIndex = 0; columnIndex < columns; columnIndex++) {
+            let sameTileSum = 1;
+            if (boardStates[0][columnIndex] != tileState.BLANK) {
+                for (let rowIndex = 1; rowIndex < rows; rowIndex++) {
+                    if (boardStates[rowIndex][columnIndex] === boardStates[rowIndex - 1][columnIndex]) {
+                        sameTileSum++;
+                    }
+                }
+                if (sameTileSum === columns) return boardStates[0][columnIndex];
 
-    // const winOptions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-    // winOptions.forEach((winOption) => {
-    //         if ((boardStates[winOption[0]] != tileState.BLANK) &&
-    //             boardStates[winOption[0]] === boardStates[winOption[1]] &&
-    //             boardStates[winOption[0]] === boardStates[winOption[2]]
-    //         ) {
-    //             alert(`${boardStates[winOption[0]] === tileState.X ? 'X' : 'O'} WON!!!!`);
-    //             return;
-    //         }
-    //     }
-    // )
-};
+            }
+        }
+        if (columns === rows) {
+            // diagonals check
+            let mainDiagonalSum = 1;
+            let secondaryDiagonalSum = 1;
+            for (let rowIndex = 1; rowIndex < rows; rowIndex++) {
+                for (let columnIndex = 1; columnIndex < columns; columnIndex++) {
+                    //main
+                    if (boardStates[rowIndex][columnIndex] != tileState.BLANK &&
+                        boardStates[rowIndex][columnIndex] === boardStates[rowIndex - 1][columnIndex - 1]) {
+                        mainDiagonalSum++;
+                    }
+                    //secondary
+                    if (boardStates[rowIndex][columns - columnIndex - 1] != tileState.BLANK &&
+                        boardStates[rowIndex][columns - columnIndex - 1] === boardStates[rowIndex - 1][columns - columnIndex]) {
+                        secondaryDiagonalSum++;
+                    }
+
+                }
+            }
+            if (mainDiagonalSum === rows) {
+                return boardStates[0][0]
+            }
+            if (secondaryDiagonalSum === rows) {
+                return boardStates[0][columns - 1]
+            }
+        }
+        return null;
+    }
+;
 
