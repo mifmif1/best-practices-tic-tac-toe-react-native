@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import colors from "@/src/constants/colors"
 
 const styles = StyleSheet.create({
     board: {
@@ -23,15 +24,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        // backgroundColor: "#d7482c",
-        backgroundColor: "#83b524",
+        backgroundColor: colors.primary,
     },
     resetButtonText: {
         fontSize: 16,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
-        color: 'black',
+        color: colors.text,
     }
 })
 
