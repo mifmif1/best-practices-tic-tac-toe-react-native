@@ -5,7 +5,7 @@ import xoTurn from "@/src/types/enums/xoTurn";
 import tileState from "@/src/types/enums/tileState";
 import Board from "@/src/types/interfaces/board";
 import {whoWon} from "@/src/services/api/xoAPI"
-    import styles from "./style"
+import styles from "./style"
 
 const XOBoardComponent = () => {
     const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
@@ -13,7 +13,7 @@ const XOBoardComponent = () => {
 
     const tileClicked = (row: number, column: number) => {
         if (boardStates[row][column] != tileState.BLANK) {
-            alert("already clicked!");
+            alert(texts.tileSecondClickMsg);
             return;
         }
         const nextBoard: Board = boardStates.map((rowElements, rowIndex) => rowElements.map((tileValue, columnIndex) => {
@@ -34,9 +34,9 @@ const XOBoardComponent = () => {
     useEffect(() => {
             const winner = whoWon(boardStates);
             if (winner === tileState.O) {
-                alert('O winner')
+                alert(texts.oWinMsg)
             } else if (winner === tileState.X) {
-                alert('X winner')
+                alert(texts.xWinMsg)
             }
 
         }
@@ -49,12 +49,12 @@ const XOBoardComponent = () => {
             onPress={() => resetBoard(xoTurn.X)}
         >
             <Text style={styles.resetButtonText}>
-                Reset
+                {texts.resetBtn}
             </Text>
         </Pressable>
 
         <Text>
-            Current Turn: {currentTurn === xoTurn.X ? "X" : "O"}
+            {currentTurn === xoTurn.X ? texts.xTurn : texts.oTurn}
         </Text>
 
         <View style={styles.columnContainer}>
