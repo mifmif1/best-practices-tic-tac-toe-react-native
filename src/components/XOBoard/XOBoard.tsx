@@ -52,7 +52,7 @@ const XOBoardComponent = () => {
             </Text>
         </Pressable>
 
-        <Text>
+        <Text style={styles.currentTurn}>
             Current Turn: {currentTurn === xoTurn.X ? "X" : "O"}
         </Text>
 
@@ -101,6 +101,13 @@ const styles = StyleSheet.create({
     resetButtonText: {
         fontSize: 16,
         lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'black',
+    },
+    currentTurn: {
+        fontSize: 15,
+        lineHeight: 50,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'black',
