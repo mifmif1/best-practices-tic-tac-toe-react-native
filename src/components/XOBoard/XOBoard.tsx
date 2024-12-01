@@ -1,4 +1,4 @@
-import {Pressable, Text, View} from "react-native";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 import TileComponent from "@/src/components/tile/Tile";
 import xoTurn from "@/src/types/enums/xoTurn";
