@@ -8,24 +8,25 @@ import {whoWon} from "@/src/services/api/xoAPI"
 
 const XOBoardComponent = () => {
     const [currentTurn, setCurrentTurn] = useState<xoTurn>(xoTurn.X);
-    const [boardStates, setBoardStates] = useState<Board>(Array(3 * 3).fill(tileState.BLANK));
+    const [boardStates, setBoardStates] = useState<Board>(Array(3).fill(Array(3).fill(tileState.BLANK)));
 
-    const tileClicked = (tileIndex: number) => {
-        if (boardStates[tileIndex] != tileState.BLANK) {
+    const tileClicked = (row: number, column: number) => {
+        if (boardStates[row][column] != tileState.BLANK) {
             alert("already clicked!");
             return;
         }
-        const nextBoard: Board = boardStates.map((value, index) => {
-            if (index === tileIndex) {
-                return (currentTurn === xoTurn.O ? tileState.O : tileState.X);
-            } else return value;
-        })
+        const nextBoard: Board = boardStates.map((rowElements, rowIndex) => rowElements.map((tileValue, columnIndex) => {
+                if (row === rowIndex && column === columnIndex) {
+                    return (currentTurn === xoTurn.O ? tileState.O : tileState.X);
+                } else return tileValue;
+            })
+        )
         setBoardStates(nextBoard);
         setCurrentTurn(() => currentTurn === xoTurn.X ? xoTurn.O : xoTurn.X)
     }
 
     const resetBoard = (firstTurn: xoTurn) => {
-        setBoardStates(() => boardStates.map(() => tileState.BLANK));
+        setBoardStates(() => boardStates.map((tiles, _) => tiles.fill(tileState.BLANK)));
         setCurrentTurn(() => firstTurn);
     }
 
@@ -35,27 +36,27 @@ const XOBoardComponent = () => {
     );
 
     return (<View style={styles.board}>
+
         <Pressable
             style={styles.resetButton}
             onPress={() => resetBoard(xoTurn.X)}
         >
-            <Text
-                style={styles.resetButtonText}>Reset</Text>
+            <Text style={styles.resetButtonText}>Reset</Text>
         </Pressable>
+
         <View style={styles.columnContainer}>
-            {[...Array(3).keys()].map((_, rowIndex) =>
-                <View key={`Row-${rowIndex}`} style={styles.rowContainer}>
-                    {[...Array(3).keys()].map((_, columnIndex) =>
-                        <TileComponent
-                            key={`Tile-${rowIndex}-${columnIndex}`}
-                            tileClicked={() => tileClicked(3 * rowIndex + columnIndex)} // shifting ternary base to decimal!!! this is amazing! genius :)
-                            state={boardStates[3 * rowIndex + columnIndex]}
-                        />
+            {boardStates.map((rowElements, rowIndex) =>
+                <View style={styles.rowContainer}>
+                    {rowElements.map((tileValue, columnIndex) =>
+                        <TileComponent state={tileValue} tileClicked={() => tileClicked(rowIndex, columnIndex)}/>
                     )}
-                </View>)}
-        </View>)
-    </View>);
+                </View>
+            )}
+        </View>
+
+    </View>)
 };
+
 
 const styles = StyleSheet.create({
     board: {
